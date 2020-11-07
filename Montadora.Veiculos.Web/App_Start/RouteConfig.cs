@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace Montadora.Veiculos.Web
+namespace Montadoras.Veiculos.Web
 {
     public class RouteConfig
     {

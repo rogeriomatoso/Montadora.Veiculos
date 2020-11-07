@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace Montadora.Veiculos.Web
+namespace Montadoras.Veiculos.Web
 {
     public class BundleConfig
     {
