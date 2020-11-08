@@ -52,6 +52,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\MontadoraDbContext.cs" />
+    <Compile Include="Migrations\202011081330588_Migracao-Inicial.cs" />
+    <Compile Include="Migrations\202011081330588_Migracao-Inicial.designer.cs">
+      <DependentUpon>202011081330588_Migracao-Inicial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TypeConfiguration\MontadoraTypeConfiguration.cs" />
     <Compile Include="TypeConfiguration\VeiculoTypeConfiguration.cs" />
@@ -69,6 +74,11 @@
       <Project>{85dad881-b530-40c3-98db-3aad2f93ba34}</Project>
       <Name>Montadoras.Veiculos.Generica.Entity</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202011081330588_Migracao-Inicial.resx">
+      <DependentUpon>202011081330588_Migracao-Inicial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

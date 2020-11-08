@@ -8,26 +8,46 @@ using System.Threading.Tasks;
 
 namespace Montadoras.Veiculos.Dados.Entity.TypeConfiguration
 {
-    class VeiculoTypeConfiguration : MontadoraEntityAbstractConfig<Montadora>
+    class VeiculoTypeConfiguration : MontadoraEntityAbstractConfig<Veiculo>
     {
         protected override void ConfigurarCamposTabela()
         {
-            throw new NotImplementedException();
+            Property(p => p.IdVeiculo)
+                .IsRequired()
+                .HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations
+                                            .Schema.DatabaseGeneratedOption.Identity)
+                .HasColumnName("IdVeiculo");
+
+            Property(p => p.Modelo)
+                .IsRequired()
+                .HasMaxLength(100)
+                .HasColumnName("Modelo");
+
+            Property(p => p.Ano)
+                .IsRequired()
+                .HasColumnName("Modelo - Ano");
+
+            Property(p => p.IdMontadora)
+                .IsRequired()
+                .HasColumnName("Nome Montadora");
+
         }
 
         protected override void ConfigurarChaveEstrangeira()
         {
-            throw new NotImplementedException();
+            HasRequired(p => p.Montadora)
+                .WithMany(p => p.Veiculos)
+                .HasForeignKey(fk => fk.IdMontadora);
         }
 
         protected override void ConfigurarChavePrimaria()
         {
-            throw new NotImplementedException();
+           HasKey(pk => pk.IdVeiculo);
         }
 
         protected override void ConfigurarNomeTabela()
         {
-            throw new NotImplementedException();
+           ToTable("Veiculo");
         }
     }
 }

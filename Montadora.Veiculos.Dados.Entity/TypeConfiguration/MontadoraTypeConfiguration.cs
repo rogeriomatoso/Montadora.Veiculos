@@ -12,22 +12,42 @@ namespace Montadoras.Veiculos.Dados.Entity.TypeConfiguration
     {
         protected override void ConfigurarCamposTabela()
         {
-            throw new NotImplementedException();
+            Property(p =>p.Id)
+                .IsRequired()
+                .HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema
+                                            .DatabaseGeneratedOption.Identity)
+                .HasColumnName("Id");
+
+            Property(p => p.Nome)
+                .IsRequired()
+                .HasMaxLength(100)
+                .HasColumnName("Nome");
+
+            Property(p => p.Nacionalidade)
+                .IsRequired()
+                .HasMaxLength(100)
+                .HasColumnName("Nacionalidade");
+
+            Property(p => p.MercadoPaises)
+                .IsRequired()
+                .HasMaxLength(300)
+                .HasColumnName("MercadoPaises");            
+
         }
 
         protected override void ConfigurarChaveEstrangeira()
         {
-            throw new NotImplementedException();
+           
         }
 
         protected override void ConfigurarChavePrimaria()
         {
-            throw new NotImplementedException();
+            HasKey(pk => pk.Id);
         }
 
         protected override void ConfigurarNomeTabela()
         {
-            throw new NotImplementedException();
+            ToTable("Montadora");
         }
     }
 }
