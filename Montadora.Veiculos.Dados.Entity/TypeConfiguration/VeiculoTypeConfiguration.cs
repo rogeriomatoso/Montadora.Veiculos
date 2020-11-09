@@ -29,7 +29,7 @@ namespace Montadoras.Veiculos.Dados.Entity.TypeConfiguration
 
             Property(p => p.IdMontadora)
                 .IsRequired()
-                .HasColumnName("Nome Montadora");
+                .HasColumnName("Id Montadora");
 
         }
 
