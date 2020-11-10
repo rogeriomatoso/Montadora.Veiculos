@@ -6,8 +6,10 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
 using Montadoras.Veiculos.Dados.Entity.Context;
 using Montadoras.Veiculos.Dominio;
+using Montadoras.Veiculos.Web.ViewModels.Montadora;
 
 namespace Montadoras.Veiculos.Web.Controllers
 {
@@ -18,7 +20,9 @@ namespace Montadoras.Veiculos.Web.Controllers
         // GET: Montadoras
         public ActionResult Index()
         {
-            return View(db.Montadoras.ToList());
+            return View(Mapper.Map<List<Montadora>,
+                        List<MontadoraIndexViewModel>>
+                        (db.Montadoras.ToList()));
         }
 
         // GET: Montadoras/Details/5
