@@ -12,6 +12,7 @@ namespace Montadoras.Veiculos.Web.App_Start
         public static void Configurar()
         {
             Mapper.AddProfile < DominioParaViewModelProfile>();
+            Mapper.AddProfile<ViewModelParaDominioProfile>();
         }
     }
 }

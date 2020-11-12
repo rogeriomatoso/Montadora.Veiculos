@@ -37,7 +37,7 @@ namespace Montadoras.Veiculos.Web.Controllers
             {
                 return HttpNotFound();
             }
-            return View(montadora);
+            return View(Mapper.Map<Montadora, MontadoraIndexViewModel>(montadora));
         }
 
         // GET: Montadoras/Create
@@ -51,16 +51,17 @@ namespace Montadoras.Veiculos.Web.Controllers
         // Para obter mais detalhes, confira https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nome,Nacionalidade,MercadoPaises")] Montadora montadora)
+        public ActionResult Create([Bind(Include = "Id,Nome,Nacionalidade,MercadoPaises")] MontadoraViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
+                Montadora montadora = Mapper.Map<MontadoraViewModel, Montadora>(viewModel);
                 db.Montadoras.Add(montadora);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(montadora);
+            return View(viewModel);
         }
 
         // GET: Montadoras/Edit/5
@@ -75,7 +76,7 @@ namespace Montadoras.Veiculos.Web.Controllers
             {
                 return HttpNotFound();
             }
-            return View(montadora);
+            return View(Mapper.Map<Montadora, MontadoraViewModel>(montadora));
         }
 
         // POST: Montadoras/Edit/5
@@ -83,15 +84,16 @@ namespace Montadoras.Veiculos.Web.Controllers
         // Para obter mais detalhes, confira https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nome,Nacionalidade,MercadoPaises")] Montadora montadora)
+        public ActionResult Edit([Bind(Include = "Id,Nome,Nacionalidade,MercadoPaises")] MontadoraViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
+                Montadora montadora = Mapper.Map<MontadoraViewModel, Montadora>(viewModel);
                 db.Entry(montadora).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(montadora);
+            return View(viewModel);
         }
 
         // GET: Montadoras/Delete/5
@@ -106,7 +108,7 @@ namespace Montadoras.Veiculos.Web.Controllers
             {
                 return HttpNotFound();
             }
-            return View(montadora);
+            return View(Mapper.Map<Montadora, MontadoraIndexViewModel>(montadora));
         }
 
         // POST: Montadoras/Delete/5

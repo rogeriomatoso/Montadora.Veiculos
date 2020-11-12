@@ -13,9 +13,18 @@ namespace Montadoras.Veiculos.Web.AutoMapper
     {
         protected override void Configure()
         {
-            Mapper.CreateMap<Montadora, MontadoraIndexViewModel>();
+            Mapper.CreateMap<Montadora, MontadoraIndexViewModel>()
+                .ForMember(p=>p.Nome, opt =>
+                {
+                    opt.MapFrom(src => string.Format("{0}: {1}", src.Nome, src.Nacionalidade
+                        .ToString()));
+                });
+
+            Mapper.CreateMap<Montadora, MontadoraViewModel>();
+
 
             Mapper.CreateMap<Veiculo, VeiculoIndexViewModel>();
+            Mapper.CreateMap<Veiculo, VeiculoViewModel>();
         }
     }
 }
