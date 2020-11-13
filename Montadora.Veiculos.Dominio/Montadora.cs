@@ -14,5 +14,6 @@ namespace Montadoras.Veiculos.Dominio
         public string Nacionalidade { get; set; }
         public string MercadoPaises { get; set; }
         public virtual List<Veiculo> Veiculos { get; set; }
+        public string CNPJMontadora { get; set; }
     }
 }

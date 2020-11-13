@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Montadoras.Veiculos.Web.Annotations;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -25,5 +26,10 @@ namespace Montadoras.Veiculos.Web.ViewModels.Montadora
         [Required(ErrorMessage = "Este campo não pode ficar em branco.")]
         [MaxLength(300, ErrorMessage = "Este campo pode  conter um maximo de 100 caracteres!")]
         public string MercadoPaises { get; set; }
+
+        [Display(Name = "CNPJ")]
+        [Required(ErrorMessage ="CNPJ é obrigatório!")]
+        [CNPJMontadora(ErrorMessage ="CNPJ deve conter 14 digitos")]
+        public string CNPJMontadora { get; set; }
     }
 }

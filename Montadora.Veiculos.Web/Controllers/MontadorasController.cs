@@ -51,7 +51,7 @@ namespace Montadoras.Veiculos.Web.Controllers
         // Para obter mais detalhes, confira https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nome,Nacionalidade,MercadoPaises")] MontadoraViewModel viewModel)
+        public ActionResult Create([Bind(Include = "Id,Nome,Nacionalidade,MercadoPaises,CNPJMontadora")] MontadoraViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
@@ -84,7 +84,7 @@ namespace Montadoras.Veiculos.Web.Controllers
         // Para obter mais detalhes, confira https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nome,Nacionalidade,MercadoPaises")] MontadoraViewModel viewModel)
+        public ActionResult Edit([Bind(Include = "Id,Nome,Nacionalidade,MercadoPaises,CNPJMontadora")] MontadoraViewModel viewModel)
         {
             if (ModelState.IsValid)
             {

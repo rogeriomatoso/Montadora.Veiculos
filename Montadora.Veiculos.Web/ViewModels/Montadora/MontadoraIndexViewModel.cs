@@ -18,5 +18,8 @@ namespace Montadoras.Veiculos.Web.ViewModels.Montadora
 
         [Display(Name = "Mercados onde Atua")]
         public string MercadoPaises { get; set; }
+
+        [Display(Name = "CNPJ")]
+        public string CNPJMontadora { get; set; }
     }
 }

@@ -31,7 +31,11 @@ namespace Montadoras.Veiculos.Dados.Entity.TypeConfiguration
             Property(p => p.MercadoPaises)
                 .IsRequired()
                 .HasMaxLength(300)
-                .HasColumnName("MercadoPaises");            
+                .HasColumnName("MercadoPaises");
+
+            Property(p => p.CNPJMontadora)
+                .IsRequired()
+                .HasColumnName("CNPJ");
 
         }
 
