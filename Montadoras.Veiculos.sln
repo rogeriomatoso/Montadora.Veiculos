@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Montadoras.Veiculos.Reposit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Montadoras.Repositorios.Comum.Entity", "Montadoras.Repositorios.Comum.Entity\Montadoras.Repositorios.Comum.Entity.csproj", "{F081DFA7-E47E-432E-B17E-078350091BE2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Montadoras.Veiculos.Repositorios.Entity", "Montadoras.Veiculos.Repositorios.Entity\Montadoras.Veiculos.Repositorios.Entity.csproj", "{1D14748F-4FCA-4FFE-8428-1368F1B0A834}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{F081DFA7-E47E-432E-B17E-078350091BE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F081DFA7-E47E-432E-B17E-078350091BE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F081DFA7-E47E-432E-B17E-078350091BE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D14748F-4FCA-4FFE-8428-1368F1B0A834}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D14748F-4FCA-4FFE-8428-1368F1B0A834}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D14748F-4FCA-4FFE-8428-1368F1B0A834}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D14748F-4FCA-4FFE-8428-1368F1B0A834}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -61,6 +67,7 @@ Global
 		{85DAD881-B530-40C3-98DB-3AAD2F93BA34} = {3A513055-A066-423B-949D-E99AFFE45994}
 		{3DD3D59E-4150-4CB7-BBF6-3D2023BB27C0} = {A3EB0CF5-FB92-4FA7-B1E2-9A949255BA35}
 		{F081DFA7-E47E-432E-B17E-078350091BE2} = {A3EB0CF5-FB92-4FA7-B1E2-9A949255BA35}
+		{1D14748F-4FCA-4FFE-8428-1368F1B0A834} = {A3EB0CF5-FB92-4FA7-B1E2-9A949255BA35}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1CB6565E-7679-4E93-B96C-FAFF0627F07B}

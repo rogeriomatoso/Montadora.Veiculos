@@ -9,20 +9,25 @@ using System.Web.Mvc;
 using AutoMapper;
 using Montadoras.Veiculos.Dados.Entity.Context;
 using Montadoras.Veiculos.Dominio;
+using Montadoras.Veiculos.Repositorios.Comum;
+using Montadoras.Veiculos.Repositorios.Entity;
 using Montadoras.Veiculos.Web.ViewModels.Montadora;
 
 namespace Montadoras.Veiculos.Web.Controllers
 {
     public class MontadorasController : Controller
     {
-        private MontadoraDbContext db = new MontadoraDbContext();
+        //private MontadoraDbContext db = new MontadoraDbContext();
+
+        private IRepositorioGenerico<Montadora, int>
+            repositorioMontadoras = new MontadorasRepositorio(new MontadoraDbContext());
 
         // GET: Montadoras
         public ActionResult Index()
         {
             return View(Mapper.Map<List<Montadora>,
                         List<MontadoraIndexViewModel>>
-                        (db.Montadoras.ToList()));
+                        (repositorioMontadoras.Selecionar()));
         }
 
         // GET: Montadoras/Details/5
@@ -32,7 +37,7 @@ namespace Montadoras.Veiculos.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Montadora montadora = db.Montadoras.Find(id);
+            Montadora montadora = repositorioMontadoras.SelecionarPorId(id.Value);
             if (montadora == null)
             {
                 return HttpNotFound();
@@ -56,8 +61,7 @@ namespace Montadoras.Veiculos.Web.Controllers
             if (ModelState.IsValid)
             {
                 Montadora montadora = Mapper.Map<MontadoraViewModel, Montadora>(viewModel);
-                db.Montadoras.Add(montadora);
-                db.SaveChanges();
+                repositorioMontadoras.Inserir(montadora);
                 return RedirectToAction("Index");
             }
 
@@ -71,7 +75,7 @@ namespace Montadoras.Veiculos.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Montadora montadora = db.Montadoras.Find(id);
+            Montadora montadora = repositorioMontadoras.SelecionarPorId(id.Value);
             if (montadora == null)
             {
                 return HttpNotFound();
@@ -89,8 +93,7 @@ namespace Montadoras.Veiculos.Web.Controllers
             if (ModelState.IsValid)
             {
                 Montadora montadora = Mapper.Map<MontadoraViewModel, Montadora>(viewModel);
-                db.Entry(montadora).State = EntityState.Modified;
-                db.SaveChanges();
+                repositorioMontadoras.Alterar(montadora);
                 return RedirectToAction("Index");
             }
             return View(viewModel);
@@ -103,7 +106,7 @@ namespace Montadoras.Veiculos.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Montadora montadora = db.Montadoras.Find(id);
+            Montadora montadora = repositorioMontadoras.SelecionarPorId(id.Value);            
             if (montadora == null)
             {
                 return HttpNotFound();
@@ -116,19 +119,8 @@ namespace Montadoras.Veiculos.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Montadora montadora = db.Montadoras.Find(id);
-            db.Montadoras.Remove(montadora);
-            db.SaveChanges();
+            repositorioMontadoras.ExcluirPorId(id);
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        }       
     }
 }

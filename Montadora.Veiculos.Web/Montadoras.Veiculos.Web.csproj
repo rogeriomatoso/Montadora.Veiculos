@@ -219,9 +219,21 @@
       <Project>{1b92aeb9-d6cf-4afa-861c-cb6f06e00603}</Project>
       <Name>Montadoras.Veiculos.Dominio</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Montadoras.Repositorios.Comum.Entity\Montadoras.Repositorios.Comum.Entity.csproj">
+      <Project>{f081dfa7-e47e-432e-b17e-078350091be2}</Project>
+      <Name>Montadoras.Repositorios.Comum.Entity</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Montadoras.Veiculos.Generica.Entity\Montadoras.Veiculos.Generica.Entity.csproj">
       <Project>{85dad881-b530-40c3-98db-3aad2f93ba34}</Project>
       <Name>Montadoras.Veiculos.Generica.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Montadoras.Veiculos.Repositorios.Comum\Montadoras.Veiculos.Repositorios.Comum.csproj">
+      <Project>{3dd3d59e-4150-4cb7-bbf6-3d2023bb27c0}</Project>
+      <Name>Montadoras.Veiculos.Repositorios.Comum</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Montadoras.Veiculos.Repositorios.Entity\Montadoras.Veiculos.Repositorios.Entity.csproj">
+      <Project>{1d14748f-4fca-4ffe-8428-1368f1b0a834}</Project>
+      <Name>Montadoras.Veiculos.Repositorios.Entity</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
