@@ -23,7 +23,12 @@ namespace Montadoras.Veiculos.Web.AutoMapper
             Mapper.CreateMap<Montadora, MontadoraViewModel>();
 
 
-            Mapper.CreateMap<Veiculo, VeiculoIndexViewModel>();
+            Mapper.CreateMap<Veiculo, VeiculoIndexViewModel>()
+                .ForMember(v => v.IdMontadora, opt =>
+                {
+                    opt.MapFrom(src => src.Montadora.Nome);
+                });
+
             Mapper.CreateMap<Veiculo, VeiculoViewModel>();
         }
     }

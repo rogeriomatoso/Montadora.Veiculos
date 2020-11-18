@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="MontadorasRepositorio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VeiculosRepositorio.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Montadora.Veiculos.Dados.Entity\Montadoras.Veiculos.Dados.Entity.csproj">

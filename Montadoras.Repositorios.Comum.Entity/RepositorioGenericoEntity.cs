@@ -11,7 +11,7 @@ namespace Montadoras.Repositorios.Comum.Entity
     public class RepositorioGenericoEntity<TEntidade, TChave> : IRepositorioGenerico<TEntidade, TChave>
         where TEntidade : class
     {
-        private DbContext _contexto;
+        protected DbContext _contexto;
 
         public RepositorioGenericoEntity(DbContext contexto)
         {
@@ -44,12 +44,12 @@ namespace Montadoras.Repositorios.Comum.Entity
             _contexto.SaveChanges();
         }
 
-        public List<TEntidade> Selecionar()
+        public virtual List<TEntidade> Selecionar()
         {
             return _contexto.Set<TEntidade>().ToList();
         }
 
-        public TEntidade SelecionarPorId(TChave id)
+        public virtual TEntidade SelecionarPorId(TChave id)
         {
             return _contexto.Set<TEntidade>().Find(id);
         }

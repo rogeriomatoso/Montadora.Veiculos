@@ -6,20 +6,28 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
 using Montadoras.Veiculos.Dados.Entity.Context;
 using Montadoras.Veiculos.Dominio;
+using Montadoras.Veiculos.Repositorios.Comum;
+using Montadoras.Veiculos.Repositorios.Entity;
+using Montadoras.Veiculos.Web.ViewModels.Veiculo;
 
 namespace Montadoras.Veiculos.Web.Controllers
 {
     public class VeiculosController : Controller
     {
-        private MontadoraDbContext db = new MontadoraDbContext();
+        //private MontadoraDbContext db = new MontadoraDbContext();
+        private IRepositorioGenerico<Veiculo, long>
+            repositorioVeiculos = new VeiculosRepositorio(new MontadoraDbContext());
 
         // GET: Veiculos
         public ActionResult Index()
         {
-            var veiculos = db.Veiculos.Include(v => v.Montadora);
-            return View(veiculos.ToList());
+            // var veiculos = db.Veiculos.Include(v => v.Montadora);
+            return View(Mapper.Map<List<Veiculo>,
+                        List<VeiculoIndexViewModel>>
+                        (repositorioVeiculos.Selecionar()));
         }
 
         // GET: Veiculos/Details/5
@@ -29,18 +37,18 @@ namespace Montadoras.Veiculos.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Veiculo veiculo = db.Veiculos.Find(id);
+            Veiculo veiculo = repositorioVeiculos.SelecionarPorId(id.Value);
             if (veiculo == null)
             {
                 return HttpNotFound();
             }
-            return View(veiculo);
+            return View(Mapper.Map<Veiculo, VeiculoIndexViewModel>(veiculo));
         }
 
         // GET: Veiculos/Create
         public ActionResult Create()
         {
-            ViewBag.IdMontadora = new SelectList(db.Montadoras, "Id", "Nome");
+           // ViewBag.IdMontadora = new SelectList(db.Montadoras, "Id", "Nome");
             return View();
         }
 
@@ -49,17 +57,17 @@ namespace Montadoras.Veiculos.Web.Controllers
         // Para obter mais detalhes, confira https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IdVeiculo,Modelo,Ano,IdMontadora")] Veiculo veiculo)
+        public ActionResult Create([Bind(Include = "IdVeiculo,Modelo,Ano,IdMontadora")] VeiculoViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                db.Veiculos.Add(veiculo);
-                db.SaveChanges();
+                Veiculo veiculo = Mapper.Map<VeiculoViewModel, Veiculo>(viewModel);
+                repositorioVeiculos.Inserir(veiculo);
                 return RedirectToAction("Index");
             }
 
-            ViewBag.IdMontadora = new SelectList(db.Montadoras, "Id", "Nome", veiculo.IdMontadora);
-            return View(veiculo);
+           // ViewBag.IdMontadora = new SelectList(db.Montadoras, "Id", "Nome", veiculo.IdMontadora);
+            return View(viewModel);
         }
 
         // GET: Veiculos/Edit/5
@@ -69,13 +77,13 @@ namespace Montadoras.Veiculos.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Veiculo veiculo = db.Veiculos.Find(id);
+            Veiculo veiculo = repositorioVeiculos.SelecionarPorId(id.Value);
             if (veiculo == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.IdMontadora = new SelectList(db.Montadoras, "Id", "Nome", veiculo.IdMontadora);
-            return View(veiculo);
+            //ViewBag.IdMontadora = new SelectList(db.Montadoras, "Id", "Nome", veiculo.IdMontadora);
+            return View(Mapper.Map<Veiculo, VeiculoViewModel>(veiculo));
         }
 
         // POST: Veiculos/Edit/5
@@ -83,16 +91,16 @@ namespace Montadoras.Veiculos.Web.Controllers
         // Para obter mais detalhes, confira https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IdVeiculo,Modelo,Ano,IdMontadora")] Veiculo veiculo)
+        public ActionResult Edit([Bind(Include = "IdVeiculo,Modelo,Ano,IdMontadora")] VeiculoViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(veiculo).State = EntityState.Modified;
-                db.SaveChanges();
+                Veiculo veiculo = Mapper.Map<VeiculoViewModel, Veiculo>(viewModel);
+                repositorioVeiculos.Alterar(veiculo);
                 return RedirectToAction("Index");
             }
-            ViewBag.IdMontadora = new SelectList(db.Montadoras, "Id", "Nome", veiculo.IdMontadora);
-            return View(veiculo);
+            //ViewBag.IdMontadora = new SelectList(db.Montadoras, "Id", "Nome", veiculo.IdMontadora);
+            return View(viewModel);
         }
 
         // GET: Veiculos/Delete/5
@@ -102,12 +110,12 @@ namespace Montadoras.Veiculos.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Veiculo veiculo = db.Veiculos.Find(id);
+            Veiculo veiculo = repositorioVeiculos.SelecionarPorId(id.Value);
             if (veiculo == null)
             {
                 return HttpNotFound();
             }
-            return View(veiculo);
+            return View(Mapper.Map<Veiculo, VeiculoIndexViewModel>(veiculo));
         }
 
         // POST: Veiculos/Delete/5
@@ -115,19 +123,8 @@ namespace Montadoras.Veiculos.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(long id)
         {
-            Veiculo veiculo = db.Veiculos.Find(id);
-            db.Veiculos.Remove(veiculo);
-            db.SaveChanges();
+            repositorioVeiculos.ExcluirPorId(id);
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        }        
     }
 }
