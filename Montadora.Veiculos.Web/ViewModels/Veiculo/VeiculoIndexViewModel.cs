@@ -16,7 +16,7 @@ namespace Montadoras.Veiculos.Web.ViewModels.Veiculo
         [Display(Name ="Ano do Modelo")]
         public int Ano { get; set; }
 
-        [Display(Name ="Id da Montadora")]
-        public int IdMontadora { get; set; }
+        [Display(Name ="Nome da Montadora")]
+        public string NomeMontadora { get; set; }
     }
 }

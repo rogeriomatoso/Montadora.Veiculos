@@ -23,7 +23,7 @@ namespace Montadoras.Veiculos.Web.ViewModels.Veiculo
         public int Ano { get; set; }
 
 
-        [Display(Name = "Id da Montadora")]
+        [Display(Name = "Nome da Montadora")]
         [Required(ErrorMessage = "Este campo não pode ficar vazio!")]        
         public int IdMontadora { get; set; }
     }

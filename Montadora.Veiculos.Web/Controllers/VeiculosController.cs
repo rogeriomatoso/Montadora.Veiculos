@@ -99,9 +99,6 @@ namespace Montadoras.Veiculos.Web.Controllers
 
             SelectList dropDownMontadoras = new SelectList(montadoras, "Id", "Nome");
             ViewBag.DropDownMontadoras = dropDownMontadoras;
-
-            return View();
-
             return View(Mapper.Map<Veiculo, VeiculoViewModel>(veiculo));
         }
 

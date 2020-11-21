@@ -24,7 +24,7 @@ namespace Montadoras.Veiculos.Web.AutoMapper
 
 
             Mapper.CreateMap<Veiculo, VeiculoIndexViewModel>()
-                .ForMember(v => v.Modelo, opt =>
+                .ForMember(v => v.NomeMontadora, opt =>
                 {
                     opt.MapFrom(src => src.Montadora.Nome);
                 });
