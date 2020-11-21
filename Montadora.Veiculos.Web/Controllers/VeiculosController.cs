@@ -11,6 +11,7 @@ using Montadoras.Veiculos.Dados.Entity.Context;
 using Montadoras.Veiculos.Dominio;
 using Montadoras.Veiculos.Repositorios.Comum;
 using Montadoras.Veiculos.Repositorios.Entity;
+using Montadoras.Veiculos.Web.ViewModels.Montadora;
 using Montadoras.Veiculos.Web.ViewModels.Veiculo;
 
 namespace Montadoras.Veiculos.Web.Controllers
@@ -20,6 +21,9 @@ namespace Montadoras.Veiculos.Web.Controllers
         //private MontadoraDbContext db = new MontadoraDbContext();
         private IRepositorioGenerico<Veiculo, long>
             repositorioVeiculos = new VeiculosRepositorio(new MontadoraDbContext());
+
+        private IRepositorioGenerico<Montadora, int>
+            repositorioMontadoras = new MontadorasRepositorio(new MontadoraDbContext());
 
         // GET: Veiculos
         public ActionResult Index()
@@ -48,7 +52,13 @@ namespace Montadoras.Veiculos.Web.Controllers
         // GET: Veiculos/Create
         public ActionResult Create()
         {
-           // ViewBag.IdMontadora = new SelectList(db.Montadoras, "Id", "Nome");
+            // ViewBag.IdMontadora = new SelectList(db.Montadoras, "Id", "Nome");
+            List<MontadoraIndexViewModel> montadoras = Mapper.Map<List<Montadora>, 
+                List<MontadoraIndexViewModel>>(repositorioMontadoras.Selecionar());
+
+            SelectList dropDownMontadoras = new SelectList(montadoras, "Id", "Nome");
+            ViewBag.DropDownMontadoras = dropDownMontadoras;
+
             return View();
         }
 
@@ -83,6 +93,15 @@ namespace Montadoras.Veiculos.Web.Controllers
                 return HttpNotFound();
             }
             //ViewBag.IdMontadora = new SelectList(db.Montadoras, "Id", "Nome", veiculo.IdMontadora);
+
+            List<MontadoraIndexViewModel> montadoras = Mapper.Map<List<Montadora>,
+                            List<MontadoraIndexViewModel>>(repositorioMontadoras.Selecionar());
+
+            SelectList dropDownMontadoras = new SelectList(montadoras, "Id", "Nome");
+            ViewBag.DropDownMontadoras = dropDownMontadoras;
+
+            return View();
+
             return View(Mapper.Map<Veiculo, VeiculoViewModel>(veiculo));
         }
 
