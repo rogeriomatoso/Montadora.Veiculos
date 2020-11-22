@@ -30,6 +30,16 @@ namespace Montadoras.Veiculos.Web.Controllers
                         (repositorioMontadoras.Selecionar()));
         }
 
+        public ActionResult FiltrarPorNome(string pesquisa)
+        {
+            List<Montadora> montadoras = repositorioMontadoras.Selecionar()
+                .Where(m => m.Nome.Contains(pesquisa)).ToList();
+            List<MontadoraIndexViewModel> viewModels =
+                Mapper.Map<List<Montadora>, List<MontadoraIndexViewModel>>(montadoras);
+
+            return Json(viewModels, JsonRequestBehavior.AllowGet);
+        }
+
         // GET: Montadoras/Details/5
         public ActionResult Details(int? id)
         {

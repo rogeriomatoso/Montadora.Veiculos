@@ -9,43 +9,97 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Nome)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Nacionalidade)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MercadoPaises)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CNPJMontadora)
-        </th>
-        <th></th>
-    </tr>
+<div class="row">
+    <div class="col-md-10">
+        <input type="text" id="pesquisaMontadora" class="form-control"/>
+    </div>
+    <div class="col-md-2">
+        <button id="btnPesquisarMontadora">Pesquisar</button>
+    </div>
+</div>
+<table class="table" id="tblMontadoras">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nacionalidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MercadoPaises)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CNPJMontadora)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nacionalidade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MercadoPaises)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CNPJMontadora)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
 
-@foreach (var item in Model) {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.Nome)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Nacionalidade)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.MercadoPaises)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.CNPJMontadora)
-    </td>
-    <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-    </td>
-</tr>
+@section Scripts{
+    
+    <script>
+
+        $document.ready(function () {
+            $("#btnPesquisarMontadora").click(function () {
+                var termoPesquisa = $("#pesquisaMontadora").val();
+                $ajax({
+                    method: "GET",
+                    url: "/Montadora/FiltrarPorNome?pesquisa=" + termoPesquisa,
+                    success: function (data) {
+                        $("#tblMontadoras tbody > tr").remove();
+                        $.each(data, function (i, montadora) {
+                            $("#tblMontadoras tbody").append(
+                                "<tr>" +
+                                "<td>" + montadora.Nome + "</td>" +
+                                "<td>" + montadora.Nacionalidade + "</td>" +
+                                "<td>" + montadora.MercadoPaises + "</td>" +
+                                "<td>" + montadora.CNPJMontadora + "</td>" +
+                                "<td>" +
+                                "<a href ='/Montadoras/Edit/" + montadora.Id + "'>Editar</a>" +
+                                "<a href ='Montadoras/Details/" + montadora.Id + "'>Detalhar</a>" +
+                                "<a href ='/Montadoras/Delete/" + montadora.Id + "'>Excluir</a>" +
+
+                                "</td>" +
+                                "</tr>"
+                            )
+                        });
+                    },
+                    error: function (data) {
+                        alert("pesquisa invalida!");
+                    }
+
+                });
+            });
+        });
+
+    </script>
+    
+    
 }
 
-</table>
