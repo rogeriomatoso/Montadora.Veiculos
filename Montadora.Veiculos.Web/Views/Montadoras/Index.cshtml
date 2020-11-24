@@ -32,7 +32,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.CNPJMontadora)
             </th>
-            <th></th>
+           
         </tr>
     </thead>
     <tbody>
@@ -65,12 +65,12 @@
     
     <script>
 
-        $document.ready(function () {
+        $(document).ready(function () {
             $("#btnPesquisarMontadora").click(function () {
                 var termoPesquisa = $("#pesquisaMontadora").val();
-                $ajax({
+                $.ajax({
                     method: "GET",
-                    url: "/Montadora/FiltrarPorNome?pesquisa=" + termoPesquisa,
+                    url: "/Montadoras/FiltrarPorNome/" + termoPesquisa,
                     success: function (data) {
                         $("#tblMontadoras tbody > tr").remove();
                         $.each(data, function (i, montadora) {
