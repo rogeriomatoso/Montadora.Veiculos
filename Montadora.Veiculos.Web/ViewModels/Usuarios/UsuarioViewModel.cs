@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Montadoras.Veiculos.Web.Annotations;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace Montadoras.Veiculos.Web.ViewModels.Usuarios
     public class UsuarioViewModel
     {
         [Required(ErrorMessage="E-mail é obrigatório!")]
+        [EmailAttribute(ErrorMessage = "Este dominio não é permitido!")]
         public string Email { get; set; }
 
         [Required(ErrorMessage ="Preencha a Senha...")]

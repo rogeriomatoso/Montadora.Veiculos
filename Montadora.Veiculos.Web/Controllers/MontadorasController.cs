@@ -15,6 +15,7 @@ using Montadoras.Veiculos.Web.ViewModels.Montadora;
 
 namespace Montadoras.Veiculos.Web.Controllers
 {
+    [Authorize]
     public class MontadorasController : Controller
     {
         //private MontadoraDbContext db = new MontadoraDbContext();

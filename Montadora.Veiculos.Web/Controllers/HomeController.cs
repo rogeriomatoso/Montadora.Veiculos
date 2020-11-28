@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace Montadoras.Veiculos.Web.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         public ActionResult Index()
